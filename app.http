@@ -1,0 +1,403 @@
+PUT  http://localhost:8080/api/Users/34
+//user 
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTY1ODkyNSwiZXhwIjoxNzIxNjYyNTI1fQ.GmZCTxMfZ0I-416-PVX7ZtYfPGJO98iHX2HPLik0KF4
+Content-Type: application/json
+
+{ 
+    "Full_name": "Mutua",
+    "email": "mulishemm0042@gmail.com",
+    "contact_phone": "0790814593",
+    "address": "Machakos",
+    "role": "user"
+  
+}
+###
+GET http://localhost:8080/api/Users
+//admin authorised
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTc0MDY5OCwiZXhwIjoxNzIxNzQ0Mjk4fQ.o-3VinYGC3sNkpbN-bfmQxvtp1kGl55yCiymcEdUgLI
+###
+GET http://localhost:8080/api/Users/1
+//user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoic2ltb25tQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzE2NTEzLCJleHAiOjE3MjA0MDI5MTN9.zNGOWC9wSwQ6Egnfj2MbE8MSyM_D5d_1ZrU20vsL8Lc
+
+###
+DELETE  http://localhost:8080/api/Users/1
+//admin to do this
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY2NTk2NSwiZXhwIjoxNzIwNzUyMzY1fQ.rnTv748j0xr8wocXzG_sWfuY5zQ6naaB6tf1p1uQA6Y
+
+
+//Bookings
+###
+GET http://localhost:8080/api/Bookings
+//admin should do this
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY2NTk2NSwiZXhwIjoxNzIwNzUyMzY1fQ.rnTv748j0xr8wocXzG_sWfuY5zQ6naaB6tf1p1uQA6Y
+
+###
+GET http://localhost:8080/api/Bookings/32
+//user can access
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoic2ltb25tQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzE2NTEzLCJleHAiOjE3MjA0MDI5MTN9.zNGOWC9wSwQ6Egnfj2MbE8MSyM_D5d_1ZrU20vsL8Lc
+
+###
+PUT  http://localhost:8080/api/Bookings/
+//user can access
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoic2ltb25tQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzE2NTEzLCJleHAiOjE3MjA0MDI5MTN9.zNGOWC9wSwQ6Egnfj2MbE8MSyM_D5d_1ZrU20vsL8Lc
+Content-Type: application/json
+
+{ 
+ 
+    "Full_name": "Shem "
+  
+}
+
+###
+POST  http://localhost:8080/api/Bookings
+//user can update 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoic2ltb25tQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzE2NTEzLCJleHAiOjE3MjA0MDI5MTN9.zNGOWC9wSwQ6Egnfj2MbE8MSyM_D5d_1ZrU20vsL8Lc
+Content-Type: application/json
+
+{ 
+
+   
+    "user_id": 32,
+    "vehicle_id": 17,
+    "location_id": 1,
+    "total_amount": 5400,
+    "booking_date":"12-12-1200",
+    "return_date":"12-12-1300"
+   
+  
+}
+###
+DELETE  http://localhost:8080/api/Bookings/8
+//admin can do this 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjQyMDMsImV4cCI6MTcyMDQxMDYwM30.GB-L6ZlJMAfqPcJKMx5iNe6ahXpjWLLX0ZDru298K-U
+
+//vehicles
+###
+GET http://localhost:8080/api/VehiclesVehicleSpecifications
+
+###
+GET http://localhost:8080/api/Vehicles
+// admin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTI1MDE2MCwiZXhwIjoxNzIxMzM2NTYwfQ.bqCjdZ64GCg-fa3WzhwDW-S2pMAuTwwwrUv3QfECa_M
+
+###
+GET http://localhost:8080/api/Vehicles/1
+//user and admin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoic2ltb25tQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzE2NTEzLCJleHAiOjE3MjA0MDI5MTN9.zNGOWC9wSwQ6Egnfj2MbE8MSyM_D5d_1ZrU20vsL8Lc
+
+###
+PUT  http://localhost:8080/api/Vehicles/5
+//user to do this 
+Content-Type: application/json
+
+{ 
+  "vehicle_id": ,
+    "rental_rate": "45.45"
+  
+}
+
+###
+POST  http://localhost:8080/api/Vehicles
+//user and admin
+Content-Type: application/json
+
+{ 
+
+   "rental_rate": "534.45",
+   "availability": true
+  
+}
+###
+DELETE  http://localhost:8080/api/Vehicles/8
+//admin can do this
+
+//Locations
+
+
+###
+GET http://localhost:8080/api/Locations
+//Both
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU4MzUsImV4cCI6MTcyMDQxMjIzNX0._OkB_2ALrr4EsVf7HI4rJj2gpvViAAmykHJ5JNkKAx8
+###
+GET http://localhost:8080/api/Locations/1
+//Both
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU4MzUsImV4cCI6MTcyMDQxMjIzNX0._OkB_2ALrr4EsVf7HI4rJj2gpvViAAmykHJ5JNkKAx8
+###
+PUT  http://localhost:8080/api/Locations/2
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU1NjcsImV4cCI6MTcyMDQxMTk2N30.JavUFuid694cnTFiRm6wVX7hFdJxcqHnDI20hsTovfI
+Content-Type: application/json
+
+{ 
+ 
+     
+    "name": "Nairobi",
+    "address": "234356",
+    "contact_phone": "1234567890"
+  
+}
+
+###
+POST  http://localhost:8080/api/Locations
+//user authorised
+Authorization: 
+Content-Type: application/json
+
+{ 
+
+   
+    "name": "Nairobi",
+    "address": "2343",
+    "contact_phone": "1234567890"
+  
+}
+###
+DELETE  http://localhost:8080/api/Locations/3
+//User auth
+Authorization: 
+//FleetManagement
+
+###
+GET http://localhost:8080/api/FleetManagements
+//Admin
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjQyMDMsImV4cCI6MTcyMDQxMDYwM30.GB-L6ZlJMAfqPcJKMx5iNe6ahXpjWLLX0ZDru298K-U
+###
+GET http://localhost:8080/api/FleetManagements/1
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU1NjcsImV4cCI6MTcyMDQxMTk2N30.JavUFuid694cnTFiRm6wVX7hFdJxcqHnDI20hsTovfI
+
+###
+PUT  http://localhost:8080/api/FleetManagements/3
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU1NjcsImV4cCI6MTcyMDQxMTk2N30.JavUFuid694cnTFiRm6wVX7hFdJxcqHnDI20hsTovfI
+Content-Type: application/json
+
+{ 
+ 
+     
+    "name": "Nairobi",
+    "address": "234356",
+    "contact_phone": "1234567890"
+  
+}
+
+###
+POST  http://localhost:8080/api/FleetManagements
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2ltb25td2VuZHdhMTJAZ21haWwuY29tIiwicm9sZSI6ImJvdGgiLCJpYXQiOjE3MjAzMjU1NjcsImV4cCI6MTcyMDQxMTk2N30.JavUFuid694cnTFiRm6wVX7hFdJxcqHnDI20hsTovfI
+Content-Type: application/json
+
+{ 
+
+   
+    "vehicle_id": 2,
+    "acquisition_date": "2023-12-02T00:00:00.000Z",
+    "depreciation_rate": 4000343434,
+    "current_value": 4000000,
+    "maintenance_cost": 4646464646,
+    "status": "pending"
+  
+}
+###
+DELETE  http://localhost:8080/api/FleetManagements/3
+//admin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjQyMDMsImV4cCI6MTcyMDQxMDYwM30.GB-L6ZlJMAfqPcJKMx5iNe6ahXpjWLLX0ZDru298K-U
+
+//Tickets
+
+###
+GET http://localhost:8080/api/Tickets
+//Both
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoiTXdnZW5kd2FAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxMjU1NjQ1LCJleHAiOjE3MjEzNDIwNDV9.19L-oxt3TIL-qb74XOghacBAiNrgDIWUIrgkRBOfsZw
+###
+GET http://localhost:8080/api/Tickets/32
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoibWJpdGhpMTIzMjRAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjEyNzA3NTIsImV4cCI6MTcyMTI3NDM1Mn0.e9a1CBMDFU08hjZsEBHuKB4lZSleFXI1ZsoGcAH80-Y
+###
+PUT  http://localhost:8080/api/Tickets/3
+Content-Type: application/json
+
+{ 
+ 
+     
+    "name": "Nairobi",
+    "address": "234356",
+    "contact_phone": "1234567890"
+  
+}
+
+###
+POST  http://localhost:8080/api/Tickets
+Content-Type: application/json
+
+{ 
+
+   
+     "user_id": 32,
+    "subject": " Nairobi Tour ",
+    "description": "Holiday Tour",
+    "status": "Pending"
+  
+}
+###
+DELETE  http://localhost:8080/api/Tickets/6
+//both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjUzMjAsImV4cCI6MTcyMDQxMTcyMH0.SJ_UXvmhQDPOAbc7rQmh4tMDVTb2E3sC09Cvg33WwIE
+
+//VehicleSpecifications
+
+###
+GET http://localhost:8080/api/VehicleSpecifications
+//Admin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjUzMjAsImV4cCI6MTcyMDQxMTcyMH0.SJ_UXvmhQDPOAbc7rQmh4tMDVTb2E3sC09Cvg33WwIE
+###
+GET http://localhost:8080/api/VehicleSpecifications/4
+//both
+Authorization: 
+
+###
+PUT  http://localhost:8080/api/VehicleSpecifications/12
+//Amin
+Authorization: 
+Content-Type: application/json
+
+{ 
+ 
+  "vehicle_id":  47,
+  "manufacturer": "Toyota",
+  "model": "Vitz",
+  "year": 2014,
+  "fuel_type": "Petrol",
+  "engine_capacity": "Six Cylinders",
+  "transmission": "Super",
+  "seating_capacity": 6,
+  "color": "Black",
+  "features": "Luxurious"
+}
+
+###
+POST  http://localhost:8080/api/VehicleSpecifications
+//Admin
+Authorization: 
+Content-Type: application/json
+
+{ 
+
+  "vehicle_id": 48,
+  "manufacturer": "Toyota",
+  "model": "Corola",
+  "year": 2014,
+  "fuel_type": "Petrol",
+  "engine_capacity": "Eight Cylinders",
+  "transmission": "Super",
+  "seating_capacity": 6,
+  "color": "Black",
+  "features": "Luxurious"
+  
+}
+###
+DELETE  http://localhost:8080/api/VehicleSpecifications/6
+//Admin
+Authorization: 
+
+
+
+###
+GET http://localhost:8080/api/Payments
+//admin authorized
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTc0MDY5OCwiZXhwIjoxNzIxNzQ0Mjk4fQ.o-3VinYGC3sNkpbN-bfmQxvtp1kGl55yCiymcEdUgLI
+###
+GET http://localhost:8080/api/Payments/1
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoiTXdnZW5kd2FAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxMjM4NTQ0LCJleHAiOjE3MjEzMjQ5NDR9.PR2mtDW3iOSwfp6cjs1PmUXJiqJEy7h2r6bIx7RCpwE
+
+###
+PUT  http://localhost:8080/api/Payments/6
+//Both
+Content-Type: application/json
+
+{ 
+ 
+    "Full_name": "Shem "
+  
+}
+
+###
+POST  http://localhost:8080/api/Payments
+//Both
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoic2ltb25td2VuZHdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjAzMjUzMjAsImV4cCI6MTcyMDQxMTcyMH0.SJ_UXvmhQDPOAbc7rQmh4tMDVTb2E3sC09Cvg33WwIE
+Content-Type: application/json
+
+{ 
+
+   "Full_name": "Shem Muli",
+  "email": "adminshem@gmail.com",
+  "contact_phone": "shem",
+  "address": "234, Nairobi"
+  
+}
+###
+DELETE  http://localhost:8080/api/Payments/14
+//admin
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImVtYWlsIjoic2ltb25td2VuZHdhMTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTY1MjU0NiwiZXhwIjoxNzIxNjU2MTQ2fQ.BSvXk34XdgOQEY_miWbBa13jFbuCbOhpVVgCBbnFogA
+
+
+
+// Authentication
+###
+//posting auth_on_users
+POST http://localhost:8080/api/register
+Content-Type: application/json
+
+{
+   "Full_name": "Shem Muli",
+  "email": "adminshem@gmail.com",
+  "contact_phone": "0756684568",
+  "address": "234, Nairobi",
+   "role": "admin",
+    "password": "shem"
+}
+
+###
+//loging in auth_on_users
+POST  http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+   
+   "email": "adminshem@gmail.com",
+    "password": "shem"
+}
+
+###
+//Stripe
+POST  http://localhost:8080/api/create-payment-intent
+Content-Type: application/json
+
+{
+   
+    "amount": 5000,  
+    "currency": "usd",
+    "booking_id": 19
+}
+###
+
+POST  http://localhost:8080/api/create-checkout-session
+Content-Type: application/json
+
+{
+    "amount": 5400,  
+    "currency": "usd",
+     "booking_id": 19
+}
+###
+POST  http://localhost:8080/api/webhook
+Content-Type: application/json
+
+{
+   
+    "amount": 5400,  
+    "currency": "usd",
+    "booking_id": 19
+}
