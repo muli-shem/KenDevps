@@ -196,3 +196,11 @@ export const leaderAuditLogRelationships = relations(leaders, ({ one, many }) =>
     references: [audit_logs.record_id]
   }),
 }));
+
+
+
+
+export type TIUsers = typeof users.$inferInsert;
+export type TSUsers = typeof users.$inferSelect;
+export type TILeaders = typeof leaders.$inferInsert;
+export type TSLeaders = typeof leaders.$inferSelect;
