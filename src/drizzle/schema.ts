@@ -204,3 +204,5 @@ export type TIUsers = typeof users.$inferInsert;
 export type TSUsers = typeof users.$inferSelect;
 export type TILeaders = typeof leaders.$inferInsert;
 export type TSLeaders = typeof leaders.$inferSelect;
+export type TILeadcomm = typeof leader_communications.$inferInsert;
+export type TSLeadcomm = typeof leader_communications.$inferSelect;
