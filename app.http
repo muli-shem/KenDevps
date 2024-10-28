@@ -44,11 +44,13 @@ Content-Type: application/json
 
 { 
 
-   "username": "shem muli josh",
-    "email": "shemmuli123@gmail.com",
-    "password_hash": "1234567890",
-    "profile_photo": "jpeg",
-    "location": "machakos kathiani"
+    "name": "Robert Mbui",
+    "position": "MP",
+    "county": "Machakos",
+    "sub_county": "kathiani",
+    "ward": "Upper Kaewa ",
+    "manifesto": "School to be improved",
+    "photo_url": "url"
 }
 ###
 
