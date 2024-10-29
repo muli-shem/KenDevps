@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import {TILeadcomm, TSLeadcomm, leader_communications} from "../drizzle/schema"
 
-export const Leadcommune = async (limit?:number):Promise<TSLeadcomm []|null>=>{
+export const listLeadearscommuneService = async (limit?:number):Promise<TSLeadcomm []|null>=>{
     if (limit){
         return await db.query.leader_communications.findMany({
             limit:limit

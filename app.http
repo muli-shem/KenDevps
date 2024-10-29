@@ -65,3 +65,39 @@ Content-Type: application/json
     "location": "machakos kathiani"
   
 }
+###
+DELETE http://localhost:8080/api/leader_communications/2
+
+###
+ GET http://localhost:8080/api/leader_communications
+###
+ GET http://localhost:8080/api/leader_communications/2
+
+###
+POST  http://localhost:8080/api/leader_communications
+//user and admin
+Content-Type: application/json
+
+{ 
+
+    "name": "Robert Mbui",
+    "position": "MP",
+    "county": "Machakos",
+    "sub_county": "kathiani",
+    "ward": "Upper Kaewa ",
+    "manifesto": "School to be improved",
+    "photo_url": "url"
+}
+###
+
+PUT  http://localhost:8080/api/leader_communications/17
+Content-Type: application/json
+
+{ 
+    "username": "shem muli  m",
+    "email": "shemmuli123r@gmail.com",
+    "password_hash": "1234567890",
+    "profile_photo": "jpeg",
+    "location": "machakos kathiani"
+  
+}

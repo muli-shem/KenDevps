@@ -12,6 +12,7 @@ import { prometheus } from '@hono/prometheus'
 //Routers
 import { usersRouter } from './users/users.Router'
 import { leadersRouter } from './leaders/leaders.Router'
+import { leaderscommuneRouter } from './leadercommunication/leadercommunications.Router'
 
 
 
@@ -46,6 +47,7 @@ app.get('/metrics', printMetrics)
 // custom route
 app.route('/api',usersRouter)
 app.route('/api', leadersRouter)
+app.route('/api', leaderscommuneRouter)
 
 
 
