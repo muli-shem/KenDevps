@@ -206,3 +206,5 @@ export type TILeaders = typeof leaders.$inferInsert;
 export type TSLeaders = typeof leaders.$inferSelect;
 export type TILeadcomm = typeof leader_communications.$inferInsert;
 export type TSLeadcomm = typeof leader_communications.$inferSelect;
+export type TSProjects = typeof government_projects.$inferSelect;
+export type TIProjects = typeof government_projects.$inferInsert;
