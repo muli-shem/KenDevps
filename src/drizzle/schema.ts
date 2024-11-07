@@ -208,3 +208,5 @@ export type TILeadcomm = typeof leader_communications.$inferInsert;
 export type TSLeadcomm = typeof leader_communications.$inferSelect;
 export type TSProjects = typeof government_projects.$inferSelect;
 export type TIProjects = typeof government_projects.$inferInsert;
+export type TIMediafiles = typeof media_files.$inferInsert;
+export type TSMediafiles = typeof media_files.$inferSelect
