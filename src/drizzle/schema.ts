@@ -1,13 +1,19 @@
-import { pgTable, serial, varchar, text, integer, timestamp, boolean, foreignKey, date } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, text, integer,pgEnum, timestamp, boolean, foreignKey, date } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
+// Enum for user roles
+export const roleEnum = pgEnum("role", ["admin", "leader", "citizen"]);
+
 // Users Table: Stores all user-related information
 export const users = pgTable('users', {
   id: serial('id').primaryKey(), // Unique identifier for each user
   username: varchar('username', { length: 50 }).notNull().unique(), // Username of the user
   email: varchar('email', { length: 100 }).notNull().unique(), // Email address of the user
   password_hash: varchar('password_hash', { length: 256 }).notNull(), // Hashed password for secure authentication
-  profile_photo: varchar('profile_photo', { length: 255 }).notNull(), // Profile photo URL
-  location: varchar('location', { length: 100 }).notNull(), // Geographical location of the user (county/ward)
+  profile_photo: varchar('profile_photo', { length: 255 }), // Profile photo URL
+  county: varchar('county', { length: 50 }).notNull(), // County that the of user
+  sub_county: varchar('sub_county', { length: 50 }).notNull(), // Sub-county of user
+  ward: varchar('ward', { length: 50 }).notNull(), // Ward of user
+  role:varchar('role').default('citizen').notNull(),
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the user was created
   updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the user was last updated
 });
@@ -15,15 +21,15 @@ export const users = pgTable('users', {
 // Leaders Table: Stores information about various leaders
 export const leaders = pgTable('leaders', {
   id: serial('id').primaryKey(), // Unique identifier for each leader
-  name: varchar('name', { length: 100 }).notNull(), // Name of the leader
+  user_id: integer('user_id').references(() => users.id, { onDelete: "cascade" }).notNull(), // Foreign key referencing the users table
+  name: varchar('name', { length: 100 }).notNull(), // Full name of the leader
   position: varchar('position', { length: 50 }).notNull(), // Position of the leader (e.g., MCA, Governor, Senator)
-  county: varchar('county', { length: 50 }).notNull(), // County that the leader represents
-  sub_county: varchar('sub_county', { length: 50 }).notNull(), // Sub-county that the leader represents
-  ward: varchar('ward', { length: 50 }).notNull(), // Ward that the leader represents
-  manifesto: text('manifesto').notNull(), // Manifesto details of the leader
-  photo_url: varchar('photo_url', { length: 255 }).notNull(), // Photo URL of the leader
+  manifesto: text('manifesto').notNull(), // Leader's manifesto
+  photo_url: varchar('photo_url', { length: 255 }).notNull(), // URL to the leader's profile photo
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the leader was added
+  updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the leader was last updated
 });
+
 
 // Leader Communications Table: Stores messages and announcements from leaders to their constituents
 export const leader_communications = pgTable('leader_communications', {
@@ -125,28 +131,31 @@ export const audit_logs = pgTable('audit_logs', {
   user_id: integer('user_id').references(() => users.id), // User who made the change
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(),
 });
-// Roles Table: Defines user roles such as 'admin', 'citizen', or 'leader'
-export const roles = pgTable('roles', {
+export const auth_table = pgTable('auth_table', {
   id: serial('id').primaryKey(),
-  name: varchar('name', { length: 50 }).notNull().unique(), // Role name (e.g., admin, leader, citizen)
-  description: text('description').notNull(), // Description of the role
-});
-// User Roles Table: Assigns roles to users
-export const user_roles = pgTable('user_roles', {
-  id: serial('id').primaryKey(),
-  user_id: integer('user_id').references(() => users.id, { onDelete: "cascade" }), // Reference to users
-  role_id: integer('role_id').references(() => roles.id, { onDelete: "cascade" }), // Reference to roles
-  assigned_at: timestamp('assigned_at').defaultNow().default(sql`NOW()`).notNull(), // When the role was assigned
-});
+  user_id: integer('user_id').references(() => users.id, { onDelete: "cascade" }),
+  created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(),
+  updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(),
 
+});
 // relationships 
 
 export const userRelationships = relations(users,({one, many}) =>({
-  media_files:one(media_files,{
+  media_files:one(media_files,{ // one to one relationship
     fields:[users.id],
     references: [media_files.uploaded_by]
   })
-}))
+  ,posts:many(posts) // one to many relationship
+  ,comments:many(comments) // one to many relationship
+ 
+}));
+export const usersRelationships = relations(users,({one, many}) =>({
+ auth_tabble:one(auth_table,{
+    fields:[users.id],
+    references:[auth_table.user_id]
+  }),
+
+}));
 
 export const userfeedbackRelationships = relations(users,({one,many})=>({
   feedback_reports:one(feedback_reports,{
@@ -181,20 +190,18 @@ export const usercommentsRelationships = relations(users,({one, many})=>({
   comments:one(comments,{
   fields:[users.id],
    references:[comments.user_id]  
+  }),
+  posts:one(posts,{
+    fields:[users.id],
+    references:[posts.user_id]// one to one relationship
   })
 }))
-export const userRoleRelationships = relations(users, ({ one, many }) => ({
-user_roles: one(user_roles, {
-    fields: [users.id],
-    references: [user_roles.user_id]
-  }),
-}));
 // Example: Leader Audit Log relationship
 export const leaderAuditLogRelationships = relations(leaders, ({ one, many }) => ({
   audit_logs: one(audit_logs, {
     fields: [leaders.id],
     references: [audit_logs.record_id]
-  }),
+  })
 }));
 
 

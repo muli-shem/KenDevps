@@ -58,7 +58,6 @@ export const deleteProjects = async (C:Context)=>{
         const searchedProjects = await getProjectsService(id)
         if(!searchedProjects) return C.text("Project not found", 404);
         const res = await deleteProjectsService(id);
-        if(!res) return C.text("Project not deleted", 400);
         return C.json({msg:res}, 200)
 
     }catch(error:any){
