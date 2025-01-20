@@ -1,6 +1,8 @@
 import { Context } from "hono";
-import { UsersService,cretaeUsersService,getUsersService ,updateUsersService, deleteUsersService} from "./users.Service";
-import { users} from "../drizzle/schema"
+import { UsersService,cretaeUsersService,getUsersService ,updateUsersService, deleteUsersService,resetPassword} from "./users.Service";
+import { users } from "../drizzle/schema"; // Import the users table schema
+
+
 
 
 export const listUsers =async (c:Context)=>{
@@ -66,3 +68,18 @@ export const deleteUser = async(c:Context) =>{
         return c.json({error: error?.message}, 400)
     }
 }
+
+export const resetPasswordController = async (ctx: Context) => {
+    try {
+        const { email } = await ctx.req.json(); // Parse JSON body to extract the email
+        if (!email) {
+            return ctx.json({ error: "Email is required" }, 400); // Return error if email is missing
+        }
+
+        const result = await resetPassword(email); // Call the service function
+        return ctx.json({ message: result }, 200); // Return success response
+    } catch (error: any) {
+        console.error(error);
+        return ctx.json({ error: error.message || "An error occurred" }, 500); // Return error response
+    }
+};

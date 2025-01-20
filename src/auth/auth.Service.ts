@@ -4,6 +4,7 @@ import  db  from "../drizzle/db"; // Importing the database instance
 import { users , auth_table } from "../drizzle/schema"; // Importing the Users and Authentication table schemas
 import { eq } from "drizzle-orm";
 import { authValidator, loginSchema, userValidator } from "../validator";
+import { sendMail } from "../nodemailer/mails"; // Importing the sendMail function from the mail utility
 
 const secret = process.env.SECRET;
 const expiresIn = process.env.ExPIRESIN;
@@ -33,11 +34,15 @@ export const registerUser = async(user:any)=>{
     //Inserting data into authentication table 
     const user_id = newUser[0].id;
     try{
-        await db.insert(auth_table)
-        .values({
-            id:user_id,
-        })
-        .execute();  
+        await db.insert(auth_table).values({ id:user_id, }).execute(); 
+        //Send a welcome email to the user
+        const from = 'non-reply@yourapp.com';
+        const subject = 'Welcome to AfriVoice Hub';
+        const html = `<p>Dear ${user.username},</p>
+        <p>Welcome to AfriVoice Hub. We are excited to have you on board.</p>
+        <p>Best regards,<br>AfriVoice Hub Team</p>`;
+
+        await sendMail(from, user.email,  subject, html); // Sending the email
         return 'User registered successfully'; // Returning success message   
     }catch(error){
         //Rollback: Deleting the user from the Users table if the second insert fails
@@ -65,14 +70,21 @@ export const loginUser = async(email:string, password: string)=>{
      //Comparing the hashed password with the provided password
      const isValidPassword =await  bcrypt.compareSync(password, auth.password_hash);
      if(!isValidPassword){
-        throw new Error('Invalid credentials! Try again');
+        throw new Error('Invalid credentials! Try again'); 
      }  
      //Creating a JWT token
      const token = jwt.sign(
       {id:user.id, email:user.email, role:user.role},
       secret!, 
-        {expiresIn}
-     );
+        {expiresIn} );
+        //Send login notification email 
+        const form ="no-reply@yourapp.com";
+        const subject = "Login Notification";
+        const html = `<p>Hi ${user.username},</p>
+        <p>You just logged into your account. If this wasn't you, please change your password immediately.</p>
+        <p>Best Regards,<br>AfriVoice Hub Team</p>`;
+
+    await sendMail(form, user.email, subject, html); // Sending the email
      return {token, user};
     }
    // Service function to verify a JWT token

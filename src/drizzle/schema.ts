@@ -14,6 +14,8 @@ export const users = pgTable('users', {
   sub_county: varchar('sub_county', { length: 50 }).notNull(), // Sub-county of user
   ward: varchar('ward', { length: 50 }).notNull(), // Ward of user
   role:varchar('role').default('citizen').notNull(),
+  reset_token: text("reset_token"), // Add this field
+    reset_token_expiration: timestamp("reset_token_expiration"), // Add this field
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the user was created
   updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the user was last updated
 });
