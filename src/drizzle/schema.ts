@@ -156,21 +156,52 @@ export const usersRelationships = relations(users,({one, many}) =>({
     fields:[users.id],
     references:[auth_table.user_id]
   }),
-
+  leader_communications:many(leader_communications), // one to many relationship
+  audit_logs:many(audit_logs), // one to many relationship
 }));
 
 export const userfeedbackRelationships = relations(users,({one,many})=>({
   feedback_reports:one(feedback_reports,{
     fields:[users.id],
     references:[feedback_reports.id]
+  }),
+  media_files:one(media_files,{
+    fields:[users.id],
+    references:[media_files.uploaded_by]
   })
+
 }))
 
 export const usereducational_contentRelationships = relations(users, ({one,many})=>({
   educational_content:one(educational_content,{
     fields: [users.id],
     references:[educational_content.id]
+  }),
+  media_files:one(media_files,{
+    fields:[users.id],
+    references:[media_files.uploaded_by]
+  }),
+  posts:one(posts,{
+    fields:[users.id],
+    references:[posts.user_id]
+  }),
+  comments:one(comments,{
+    fields:[users.id],
+    references:[comments.user_id]
+  }),
+  audit_logs:one(audit_logs,{
+    fields:[users.id],
+    references:[audit_logs.user_id]
+  }),
+  feedback_reports:one(feedback_reports,{
+    fields:[users.id],
+    references:[feedback_reports.id]
+  }),
+  leader_communications:one(leader_communications,{
+    fields:[users.id],
+    references:[leader_communications.id]
   })
+
 }))
 
 
@@ -185,7 +216,23 @@ export const media_filesLeadeRelationships = relations(leaders, ({one, many})=>(
   media_files: one(media_files,{
    fields:[leaders.id],
     references:[media_files.leader_id] 
-  })
+  }),
+  leader_communications: one(leader_communications,{
+    fields:[leaders.id],
+    references:[leader_communications.id]
+  }),
+  feedback_reports: one(feedback_reports,{
+    fields:[leaders.id],
+    references:[feedback_reports.id]
+  }),
+  audit_logs: one(audit_logs,{
+    fields:[leaders.id],
+    references:[audit_logs.user_id]
+  }),
+  educational_content: one(educational_content,{
+    fields:[leaders.id],
+    references:[educational_content.created_by]
+  }),
 }))
 
 export const usercommentsRelationships = relations(users,({one, many})=>({

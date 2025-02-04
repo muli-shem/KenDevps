@@ -36,7 +36,7 @@ export const authMiddleware = async (c:Context &{req:HonoRequest<any, unknown>},
 
 // Middleware for admin role authorization
 // Calls authMiddleware with "admin" as the required role
-export const adminAuthMiddleware = async (c:Context , next:Next) => await authMiddleware(c, next, "citizen");
+export const adminAuthMiddleware = async (c:Context , next:Next) => await authMiddleware(c, next, "admin");
 
 // Middleware for user role authorization
 // Calls authMiddleware with "citizen" as the required role

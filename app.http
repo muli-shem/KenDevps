@@ -107,13 +107,13 @@ POST http://localhost:8080/api/register
 Content-Type: application/json
 
 {
-   "username": "Shem Muli",
-  "email": "shemmjoshua0214@gmail.com",
-  "password_hash": "shemic#3021",
-  "county": "Machakos",
-  "sub_county": "Kathiani",
-  "ward": "Upper Kaewa",
-  "role": "leader"
+   "username": "Mary Ree",
+  "email": "maryvaati855@gmail.com",
+  "password_hash": "mary#1234",
+  "county": "Kitui",
+  "sub_county": "Kitui",
+  "ward": "Ikutha",
+  "role": "citizen"
 }
 
 ###
@@ -123,6 +123,6 @@ Content-Type: application/json
 
 {
    
-   "email": "shemmjoshua0214@gmail.com",
-    "password": "shemic#3021"
+   "email": "luvongatimoth@gmail.com",
+    "password": "timothy#1234"
 }
