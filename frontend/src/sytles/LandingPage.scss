@@ -1,0 +1,152 @@
+.home-page {
+    font-family: Arial, sans-serif;
+  
+    .hero {
+      background: linear-gradient(to bottom, #004400, #ffffff, #bf0a30);
+      color: #ffffff;
+      text-align: center;
+      padding: 4rem 2rem;
+  
+      .hero-content {
+        max-width: 600px;
+        margin: 0 auto;
+  
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          color: #ffffff;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+  
+        p {
+          font-size: 1.25rem;
+          margin-bottom: 2rem;
+          color: #f5f5f5;
+        }
+  
+        .cta-button {
+          background-color: #bf0a30;
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+  
+          &:hover {
+            background-color: #9c0826;
+          }
+        }
+      }
+    }
+  
+    .constitutional-rights {
+      text-align: center;
+      padding: 3rem 2rem;
+  
+      h2 {
+        font-size: 2rem;
+        color: #004400;
+        margin-bottom: 2rem;
+      }
+  
+      .rights-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  
+        .card {
+          background: #ffffff;
+          border: 2px solid #004400;
+          padding: 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          color: #333333;
+  
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #004400;
+          }
+  
+          p {
+            font-size: 1rem;
+            color: #666666;
+          }
+        }
+      }
+    }
+  
+    .testimonials {
+      text-align: center;
+      padding: 3rem 2rem;
+      background-color: #f9f9f9;
+  
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #004400;
+      }
+  
+      .testimonials-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+        .testimonial-card {
+          background: #ffffff;
+          border: 1px solid #cccccc;
+          padding: 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+          p {
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+          }
+  
+          h4 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #004400;
+          }
+        }
+      }
+    }
+  
+    .cta {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(to bottom, #004400, #bf0a30);
+      color: #ffffff;
+  
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+  
+      .cta-button {
+        background-color: #ffffff;
+        color: #004400;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+  
+        &:hover {
+          background-color: #9c0826;
+          color: white;
+        }
+      }
+    }
+  }
+  
