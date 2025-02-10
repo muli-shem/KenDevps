@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Default storage (localStorage)
-import rootReducer from './RootReducer/rootReducer'; // Your combined reducers
+import rootReducer from '../RootReducer/rootReducer'; // Your combined reducers
+
 
 // Persist configuration
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['auth'],// Reducers that you want to persist
+
 };
 
 // Create a persisted reducer

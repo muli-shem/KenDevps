@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./Pages/HomePage";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import Register from "./Pages/Register";
+import Register from "./Features/Register";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
  
