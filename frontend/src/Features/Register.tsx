@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { registerUser } from "../Features/registerSlice"; // Import registerUser
 import { RootState, AppDispatch } from "../app/store"; // Import AppDispatch
-import "../sytles/Register.scss";
+import "../sytles/Register.scss"; // Ensure the path is correct
 
 const Register: React.FC = () => {
   const {
@@ -12,40 +13,23 @@ const Register: React.FC = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch<AppDispatch>(); // Type dispatch with AppDispatch
-  const { loading, error } = useSelector((state: RootState) => state.auth);
+  const { loading, error } = useSelector((state: RootState) =>state.auth); // Use RootState
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Debugging: Log Redux error state
+  console.log("Redux Error State:", error);
 
   const onSubmit = async (data: any) => {
     try {
       await dispatch(registerUser(data)).unwrap(); // Use unwrap() to handle the promise
-    } catch (error) {
-      console.error("Registration failed:", error);
+      navigate("/dashboard"); // Navigate to dashboard on success
+    } catch (error: any) {
+      console.error("Registration failed:", error.message || error);
     }
   };
 
   return (
     <div className="register-page">
-      {/* Left Section: Constitutional Rights */}
-      <div className="info-section left">
-        <h3>Your Rights Under the Data Protection Act, 2019</h3>
-        <ul>
-          <li>
-            <strong>Right to Access:</strong> You have the right to access your personal data held by any organization.
-          </li>
-          <li>
-            <strong>Right to Correction:</strong> You can request correction of inaccurate or incomplete personal data.
-          </li>
-          <li>
-            <strong>Right to Erasure:</strong> You can request deletion of your personal data under certain conditions.
-          </li>
-          <li>
-            <strong>Right to Object:</strong> You can object to the processing of your personal data for specific purposes.
-          </li>
-          <li>
-            <strong>Right to Data Portability:</strong> You can request your data in a structured, commonly used format.
-          </li>
-        </ul>
-      </div>
-
       {/* Registration Form */}
       <div className="register-container">
         <h2>Register</h2>
@@ -98,38 +82,16 @@ const Register: React.FC = () => {
             </select>
           </div>
 
-          {error && <p className="error">{error}</p>} {/* Display Redux error */}
-          {loading && <p>Registering...</p>} {/* Display loading state */}
+          {/* Display Redux error safely */}
+          {error && <p className="error">{typeof error === "string" ? error : "An error occurred"}</p>}
+
+          {/* Display loading state */}
+          {loading && <p>Registering...</p>}
 
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
-      </div>
-
-      {/* Right Section: Data Collection Principles */}
-      <div className="info-section right">
-        <h3>Principles of Data Collection</h3>
-        <ul>
-          <li>
-            <strong>Lawfulness, Fairness, and Transparency:</strong> Data must be processed lawfully, fairly, and transparently.
-          </li>
-          <li>
-            <strong>Purpose Limitation:</strong> Data must be collected for specified, explicit, and legitimate purposes.
-          </li>
-          <li>
-            <strong>Data Minimization:</strong> Only the necessary data should be collected for the intended purpose.
-          </li>
-          <li>
-            <strong>Accuracy:</strong> Data must be accurate and kept up to date.
-          </li>
-          <li>
-            <strong>Storage Limitation:</strong> Data should not be kept longer than necessary.
-          </li>
-          <li>
-            <strong>Integrity and Confidentiality:</strong> Data must be processed securely.
-          </li>
-        </ul>
       </div>
     </div>
   );

@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Default storage (localStorage)
 import rootReducer from '../RootReducer/rootReducer'; // Your combined reducers
-
+import {PersistPartial} from 'redux-persist/es/persistReducer';
 
 // Persist configuration
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth'],// Reducers that you want to persist
+    whitelist: ['auth','login', 'posts'],// Reducers that you want to persist
 
 };
 
@@ -30,7 +30,7 @@ const store = configureStore({
 const persistedStore = persistStore(store);
 
 // Type exports
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>& PersistPartial;
 export type AppDispatch = typeof store.dispatch;
 
 // Export store and persisted store

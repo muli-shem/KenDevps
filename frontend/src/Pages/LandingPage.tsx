@@ -21,8 +21,10 @@ import ctaVideo from "../assets/images/ctmvideo.mp4";
 import twitterIcon from "../assets/images/Xlogo.png";
 import facebookIcon from "../assets/images/facebook.png";
 import instagramIcon from "../assets/images/instagram.png";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="home-page">
       {/* Hero Section */}
@@ -51,14 +53,16 @@ const HomePage: React.FC = () => {
           </motion.p>
           <div className="button-container">
             <motion.button
-              className="cta-button"
+              className="cta-button" 
+              onClick={() => navigate("/register")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Get Started
             </motion.button>
             <motion.button
-              className="cta-button login-button"
+              className="cta-button login-button" 
+              onClick={() => navigate("/login")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

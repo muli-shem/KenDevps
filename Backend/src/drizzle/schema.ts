@@ -268,3 +268,5 @@ export type TIMediafiles = typeof media_files.$inferInsert;
 export type TSMediafiles = typeof media_files.$inferSelect;
 export type TIFeedbackReports= typeof feedback_reports.$inferInsert;
 export type TSFeedbackReports = typeof feedback_reports.$inferSelect;
+export type TIPosts = typeof posts.$inferInsert;
+export type TSPosts = typeof posts.$inferSelect;
