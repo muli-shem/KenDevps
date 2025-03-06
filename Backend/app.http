@@ -126,3 +126,48 @@ Content-Type: application/json
    "email": "luvongatimoth@gmail.com",
     "password": "timothy#1234"
 }
+
+###
+//cloudinary
+POST  http://localhost:8080/api/cloudinary/upload
+Content-Type: multipart/form; boundary=MyBoundary
+
+{
+    "id": 20,
+    "image": "image"
+}
+###
+//cloudary
+
+POST http://localhost:8080/api/cloudinary/upload
+Content-Type: multipart/form-data; boundary=MyBoundary
+
+--MyBoundary
+Content-Disposition: form-data; name="id"
+
+20
+--MyBoundary
+Content-Disposition: form-data; name="image"; filename="test.jpg"
+Content-Type: image/jpeg
+
+@C:/Users/shem/Desktop/KenDev/Afrivoice/Backend/uploads/test.jpg
+--MyBoundary--
+
+###
+
+POST http://localhost:8080/api/cloudinary/upload
+Content-Type: multipart/form-data; boundary=MyBoundary
+
+--MyBoundary
+Content-Disposition: form-data; name="userId"
+
+20
+--MyBoundary
+
+Content-Disposition: form-data; name="image"; filename="test.jpg"
+Content-Type: image/jpeg
+
+< C:/Users/shem/Desktop/KenDev/Afrivoice/Backend/uploads/test.jpg
+--MyBoundary--
+
+
