@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { media_files } from "../schema";
+import { media_files } from "../drizzle/schema";
 import { listMediafilesService, getMediafilesService, createMediafilesService, updateMediafilesService, deleteMediafilesService } from "./mediafiles.Service";
 
 export const ListMediafiles = async (C:Context)=>{
@@ -7,7 +7,7 @@ export const ListMediafiles = async (C:Context)=>{
         const limit = Number(C.req.query("limit"));
         const data = await listMediafilesService(limit);
         if(data === null||data.length===0){
-            return C.json({message:"No data found"},404);
+            return C.text("No data found");
         }
         return C.json(data);
         } catch (error:any) {

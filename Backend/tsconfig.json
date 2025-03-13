@@ -14,6 +14,6 @@
     ],
 
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../frontend/src/Pages/Education"],
   "exclude": ["node_modules", "dist"]
 }   

@@ -27,7 +27,7 @@ export const leaders = pgTable('leaders', {
   name: varchar('name', { length: 100 }).notNull(), // Full name of the leader
   position: varchar('position', { length: 50 }).notNull(), // Position of the leader (e.g., MCA, Governor, Senator)
   manifesto: text('manifesto').notNull(), // Leader's manifesto
-  photo_url: varchar('photo_url', { length: 255 }).notNull(), // URL to the leader's profile photo
+  photo_url: varchar('photo_url', { length: 255 }), // URL to the leader's profile photo
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the leader was added
   updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the leader was last updated
 });
@@ -62,7 +62,7 @@ export const government_projects = pgTable('government_projects', {
   ward: varchar('ward', { length: 50 }).notNull(), // Ward where the project is located
   budget: integer('budget').notNull(), // Budget allocated for the project
   progress_percentage: integer('progress_percentage').default(0), // Progress of the project in percentage
-  media_url: varchar('media_url', { length: 255 }).notNull(), // URL for project-related media (e.g., photos, videos)
+  media_url: varchar('media_url', { length: 255 }), // URL for project-related media (e.g., photos, videos)
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the project was posted
   updated_at: timestamp('updated_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the project was last updated
 });
@@ -83,7 +83,7 @@ export const feedback_reports = pgTable('feedback_reports', {
   id: serial('id').primaryKey(), // Unique identifier for each report
   title: varchar('title', { length: 255 }).notNull(), // Title of the report
   description: text('description').notNull(), // Detailed description of the issue
-  evidence_url: varchar('evidence_url', { length: 255 }).notNull(), // URL for evidence (e.g., images, videos)
+  evidence_url: varchar('evidence_url', { length: 255 }), // URL for evidence (e.g., images, videos)
   reported_by: integer('reported_by').references(() => users.id, {onDelete:"cascade"}), // User who reported the issue
   status: varchar('status', { length: 50 }).default('pending'), // Status of the report (e.g., pending, reviewed, resolved)
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the report was created
@@ -95,6 +95,7 @@ export const educational_content = pgTable('educational_content', {
   id: serial('id').primaryKey(), // Unique identifier for each educational material
   title: varchar('title', { length: 255 }).notNull(), // Title of the content
   content: text('content').notNull(), // Detailed content
+  image_url: varchar('image_url', { length: 255 }), // URL for images related to the content
   content_type: varchar('content_type', { length: 50 }).notNull(), // Type of content (e.g., article, video, infographic)
   created_by: integer('created_by').references(() => users.id, {onDelete:"cascade"}), // User or admin who created the content
   created_at: timestamp('created_at').defaultNow().default(sql`NOW()`).notNull(), // Timestamp for when the content was created
@@ -270,3 +271,5 @@ export type TIFeedbackReports= typeof feedback_reports.$inferInsert;
 export type TSFeedbackReports = typeof feedback_reports.$inferSelect;
 export type TIPosts = typeof posts.$inferInsert;
 export type TSPosts = typeof posts.$inferSelect;
+export type TIEducation = typeof educational_content.$inferInsert;
+export type TSEducation = typeof educational_content.$inferSelect;

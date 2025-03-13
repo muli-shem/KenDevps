@@ -22,13 +22,13 @@ const initialState: PostsState = {
 
 // Async thunk to fetch posts
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('/api/posts');
+  const response = await axios.get('/posts');
   return response.data;
 });
 
 // Async thunk to add a new post
 export const addPost = createAsyncThunk('posts/addPost', async (content: string) => {
-  const response = await axios.post('/api/posts', { content });
+  const response = await axios.post('/posts', { content });
   return response.data;
 });
 

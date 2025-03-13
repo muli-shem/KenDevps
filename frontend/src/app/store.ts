@@ -4,11 +4,12 @@ import storage from 'redux-persist/lib/storage'; // Default storage (localStorag
 import rootReducer from '../RootReducer/rootReducer'; // Your combined reducers
 import {PersistPartial} from 'redux-persist/es/persistReducer';
 
+
 // Persist configuration
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth','login', 'posts'],// Reducers that you want to persist
+    whitelist: ['auth','login', 'posts', 'education'],// Reducers that you want to persist
 
 };
 

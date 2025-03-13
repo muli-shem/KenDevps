@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-import "../sytles/Navbar.scss"; // Ensure the path is correct
+import "../styles/Navbar.scss"; // Ensure the path is correct
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -38,6 +38,11 @@ const Navbar: React.FC = () => {
           <li>
             <Link to="/constitution" onClick={() => setMenuOpen(false)}>
               Constitution
+            </Link>
+          </li>
+          <li>
+            <Link to="/content" onClick={() => setMenuOpen(false)}>
+             Civic Education
             </Link>
           </li>
           <li>

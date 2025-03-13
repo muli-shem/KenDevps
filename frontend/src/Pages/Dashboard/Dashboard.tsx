@@ -1,17 +1,77 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FaHome, FaSearch, FaBell, FaEnvelope, FaUser, FaPlusCircle } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { fetchPosts, addPost } from '../Dashboard/postSlice';
-import { RootState, store } from '../../app/store';
-import '../../sytles/Contact.scss';
+import { fetchAllContent } from '../Education/contentSlice';
+import {  store } from '../../app/store';
+
+import LeftSidebar from '../../components/LeftSidebar';
+import RightSidebar from '../../components/RightSidebar';
+import MainContent from '../../components/MainContent';
+
+import '../../styles/Dashboard.scss';
 
 const Dashboard = () => {
   const dispatch = useDispatch<typeof store.dispatch>();
-  const { posts, status, error } = useSelector((state: RootState) => state.posts);
+  const [currentView, setCurrentView] = useState('home');
+  
+  // State for tracking user interactions
+  const [likedItems, setLikedItems] = useState<Record<string, boolean>>({});
+  const [dislikedItems, setDislikedItems] = useState<Record<string, boolean>>({});
+  const [bookmarkedItems, setBookmarkedItems] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
+  // Function to handle navigation
+  const handleNavigation = (view: string) => {
+    setCurrentView(view);
+    
+    // Load educational content when switching to that view
+    if (view === 'education') {
+      dispatch(fetchAllContent());
+    }
+  };
+
+  // Functions to handle interactions
+  const handleLike = (id: string) => {
+    setLikedItems(prev => {
+      const newState = { ...prev };
+      newState[id] = !prev[id];
+      // Remove dislike if liking
+      if (newState[id]) {
+        setDislikedItems(prevDislikes => {
+          const newDislikes = { ...prevDislikes };
+          delete newDislikes[id];
+          return newDislikes;
+        });
+      }
+      return newState;
+    });
+  };
+
+  const handleDislike = (id: string) => {
+    setDislikedItems(prev => {
+      const newState = { ...prev };
+      newState[id] = !prev[id];
+      // Remove like if disliking
+      if (newState[id]) {
+        setLikedItems(prevLikes => {
+          const newLikes = { ...prevLikes };
+          delete newLikes[id];
+          return newLikes;
+        });
+      }
+      return newState;
+    });
+  };
+
+  const handleBookmark = (id: string) => {
+    setBookmarkedItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   const handleAddPost = () => {
     const content = prompt('Enter your post content:');
@@ -22,35 +82,26 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <nav className="sidebar">
-        <ul>
-          <li><FaHome /> <span>Home</span></li>
-          <li><FaSearch /> <span>Explore</span></li>
-          <li><FaBell /> <span>Notifications</span></li>
-          <li><FaEnvelope /> <span>Messages</span></li>
-          <li><FaUser /> <span>Profile</span></li>
-          <li onClick={handleAddPost}><FaPlusCircle /> <span>Post</span></li>
-        </ul>
-      </nav>
-      <main className="main-content">
-        <header>
-          <h1>AfriVoice Hub</h1>
-        </header>
-        <section className="posts">
-          {status === 'loading' && <p>Loading posts...</p>}
-          {status === 'failed' && <p>Error: {error}</p>}
-          {status === 'succeeded' && (
-            <ul>
-              {posts.map((post) => (
-                <li key={post.id}>
-                  <p>{post.content}</p>
-                  <small>By {post.author} on {new Date(post.timestamp).toLocaleString()}</small>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </main>
+      <LeftSidebar 
+        currentView={currentView} 
+        handleNavigation={handleNavigation} 
+        handleAddPost={handleAddPost} 
+      />
+      
+      <MainContent 
+        currentView={currentView}
+        likedItems={likedItems}
+        dislikedItems={dislikedItems}
+        bookmarkedItems={bookmarkedItems}
+        handleLike={handleLike}
+        handleDislike={handleDislike}
+        handleBookmark={handleBookmark}
+        handleNavigation={handleNavigation}
+      />
+      
+      <RightSidebar 
+        handleNavigation={handleNavigation} 
+      />
     </div>
   );
 };

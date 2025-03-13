@@ -14,9 +14,12 @@ export const uploadImage = async (c: Context) => {
 
     // Get file from form-data
     const file = formData.get("image") as File;
+    // Check if file exists and is not empty
+    console.log(file);
     if (!file) {
       return c.json({ message: "No file uploaded" }, 400);
     }
+
 
     // Convert file to base64
     const buffer = await file.arrayBuffer();

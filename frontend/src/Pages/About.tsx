@@ -1,5 +1,5 @@
 import React from "react";
-import "../sytles/About.scss";
+import "../styles/About.scss";
 
 const About: React.FC = () => {
   return (

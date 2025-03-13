@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { registerUser } from "../Features/registerSlice"; // Import registerUser
 import { RootState, AppDispatch } from "../app/store"; // Import AppDispatch
-import "../sytles/Register.scss"; // Ensure the path is correct
+import "../styles/Register.scss"; // Ensure the path is correct
 
 const Register: React.FC = () => {
   const {

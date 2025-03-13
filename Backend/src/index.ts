@@ -14,7 +14,7 @@ import { usersRouter } from './users/users.Router'
 import { leadersRouter } from './leaders/leaders.Router'
 import { leaderscommuneRouter } from './leadercommunication/leadercommunications.Router'
 import {authRouter} from "./auth/auth.Router"
-import cloudinaryRoutes from "./cloudinary/cloudinary.Router";
+import {educationRouter} from "./education/education.Router";
 
 
 
@@ -51,7 +51,7 @@ app.route('/api',usersRouter)
 app.route('/api', leadersRouter)
 app.route('/api', leaderscommuneRouter)
 app.route('/api', authRouter)
-app.route("/api/cloudinary", cloudinaryRoutes);
+app.route('/api', educationRouter);
 
 
 

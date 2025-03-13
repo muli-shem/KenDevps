@@ -7,6 +7,7 @@ import Contact from "./Pages/Contact";
 import Register from "./Features/Register";
 import Login from "./Features/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import EducationalContentForm from "./Pages/Education/content";
  
 
 const App: React.FC = () => {
@@ -16,12 +17,14 @@ const App: React.FC = () => {
         <Navbar />
       
           <Routes>
+
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/content" element={<EducationalContentForm />} />
           </Routes>
     </Router>
   );

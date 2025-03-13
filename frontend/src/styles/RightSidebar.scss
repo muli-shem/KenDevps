@@ -1,0 +1,88 @@
+// Define your variables at the top of the file
+$right-sidebar-width: 320px; // Adjust width as needed
+$secondary-color: #1e1e1e; // Adjust color as needed
+$hover-color: #333333; // Adjust color as needed
+$accent-color: #6c63ff; // Adjust color as needed
+$text-color: #ffffff; // Adjust color as needed
+$transition: 0.3s ease; // Adjust timing as needed
+
+// Right sidebar styles
+.right-sidebar {
+    width: $right-sidebar-width;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: $secondary-color;
+    z-index: 10;
+    border-left: 1px solid $hover-color;
+    
+    // Hide on smaller screens (handled in Dashboard.scss media queries)
+    
+    .sidebar-content {
+      height: 100%;
+      padding: 1rem;
+      overflow-y: auto;
+      
+      // Hide scrollbar but keep functionality
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid $hover-color;
+      }
+      
+      .rights-quick-view {
+        .rights-item {
+          background: lighten($secondary-color, 5%);
+          padding: 1rem;
+          margin-bottom: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          animation: fadeIn 0.3s ease-in-out;
+          
+          h4 {
+            color: $accent-color;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+          }
+          
+          .view-more-btn {
+            background: transparent;
+            color: $accent-color;
+            border: 1px solid $accent-color;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all $transition;
+            
+            &:hover {
+              background: $accent-color;
+              color: $text-color;
+            }
+          }
+        }
+      }
+    }
+}

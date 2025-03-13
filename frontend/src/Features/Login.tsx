@@ -1,77 +1,120 @@
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form"; // Import SubmitHandler
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../Features/loginSlice"; // Import the login action
-import { RootState, AppDispatch } from "../app/store"; // Import types
-import "../sytles/Login.scss"; // Import styles
-
-// Define the shape of the form inputs
-interface LoginFormInputs {
-  email: string;
-  password: string;
-}
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../Features/loginSlice';
+import { AppDispatch, RootState } from '../app/store';
+import '../styles/Login.scss';
+import { AlertCircle } from 'lucide-react';
 
 const Login: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormInputs>(); // Explicitly type useForm
-  const dispatch = useDispatch<AppDispatch>(); // Typed dispatch
-  const {loading, error, token } = useSelector((state: RootState) => state.login); // Adjusted selector
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
-  // Redirect to dashboard if the user is already logged in
-  React.useEffect(() => {
-    if (token) {
-      navigate("/dashboard");
+  
+  const { loading, error } = useSelector((state: RootState) => state.login);
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !password) {
+      return;
     }
-  }, [token, navigate]);
-
-  // Define the onSubmit function with SubmitHandler type
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    
     try {
-      await dispatch(loginUser(data)).unwrap(); // Dispatch login action
-      navigate("/dashboard"); // Redirect to dashboard on success
-    } catch (error) {
-      console.error("Login failed:", error);
+      const result = await dispatch(loginUser({ email, password })).unwrap();
+      console.log('Login successful:', result);
+      navigate('/dashboard');
+    } catch (err) {
+      console.error('Login failed:', err);
     }
   };
-
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h1>Welcome Back</h1>
+          <p>Please enter your details to sign in</p>
+        </div>
+        
+        <form className="login-form" onSubmit={handleSubmit}>
+          {error && (
+            <div className="error-message">
+              <AlertCircle size={16} />
+              <span>{error}</span>
+            </div>
+          )}
+          
           <div className="form-group">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
-              {...register("email", { required: "Email is required" })}
+              id="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
             />
-            {errors.email && (
-              <span className="error">{errors.email.message ?? "Email is required"}</span>
-            )}
           </div>
-
+          
           <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && (
-              <span className="error">{errors.password.message ?? "Password is required"}</span>
-            )}
+            <label htmlFor="password">Password</label>
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+              />
+              <button 
+                type="button" 
+                className="toggle-password" 
+                onClick={togglePasswordVisibility}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
           </div>
-
-          {error && <p className="error">{error}</p>} {/* Display Redux error */}
-          {loading && <p>Logging in...</p>} {/* Display loading state */}
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          
+          <div className="form-options">
+            <div className="remember-me">
+              <input
+                type="checkbox"
+                id="remember"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
+              <label htmlFor="remember">Remember me</label>
+            </div>
+            <a href="/forgot-password" className="forgot-password">
+              Forgot password?
+            </a>
+          </div>
+          
+          <button
+            type="submit"
+            className="login-button"
+            disabled={loading}
+          >
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
+          
+          <div className="register-link">
+            Don't have an account? <a href="/register">Sign up</a>
+          </div>
         </form>
       </div>
     </div>

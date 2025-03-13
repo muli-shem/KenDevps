@@ -1,7 +1,9 @@
 ###
  GET http://localhost:8080/api/users
 ###
- GET http://localhost:8080/api/users/17
+GET http://localhost:8080/api/mediafiles
+###
+GET http://localhost:8080/api/users/17
 
 ###
 POST  http://localhost:8080/api/users

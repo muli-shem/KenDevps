@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion"; // For animations
-import "../sytles/LandingPage.scss"; // Ensure the path is correct
+import "../styles/LandingPage.scss"; // Ensure the path is correct
 
 // Import images and icons
 import heroImage from "../assets/images/kenyaflag.png";

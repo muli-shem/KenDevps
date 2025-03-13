@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "../db";
-import {TSMediafiles, TIMediafiles, media_files} from "../schema"
+import db from "../drizzle/db";
+import {TSMediafiles, TIMediafiles, media_files} from "../drizzle/schema"
 
 export const listMediafilesService = async (limit?:number):Promise<TSMediafiles[]|null>=>{
     if(limit){
