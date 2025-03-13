@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa"; // Import hamburger and close icons
 import "../styles/Navbar.scss"; // Ensure the path is correct
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen(!menuOpen); // Toggle the menu state
   };
 
   return (
@@ -15,44 +15,19 @@ const Navbar: React.FC = () => {
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-          AfriVoice Hub
+          <span className="afrivoice">AfriVoice</span> Hub
         </Link>
 
         {/* Mobile Menu Toggle */}
         <div className="menu-icon" onClick={toggleMenu}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
+          {menuOpen ? <FaTimes /> : <FaBars />} {/* Toggle between hamburger and close icons */}
         </div>
 
         {/* Navigation Links */}
         <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/leaders" onClick={() => setMenuOpen(false)}>
-              Leaders
-            </Link>
-          </li>
-          <li>
-            <Link to="/reports" onClick={() => setMenuOpen(false)}>
-              Reports
-            </Link>
-          </li>
-          <li>
-            <Link to="/constitution" onClick={() => setMenuOpen(false)}>
-              Constitution
-            </Link>
-          </li>
-          <li>
-            <Link to="/content" onClick={() => setMenuOpen(false)}>
-             Civic Education
-            </Link>
-          </li>
-          <li>
-            <Link to="/projects" onClick={() => setMenuOpen(false)}>
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link to="/community" onClick={() => setMenuOpen(false)}>
-              Community
+            <Link to="/about" onClick={() => setMenuOpen(false)}>
+              About Us
             </Link>
           </li>
           <li>
@@ -65,12 +40,12 @@ const Navbar: React.FC = () => {
               Login
             </Link>
           </li>
+          <li>
+            <Link to="/register" className="register-btn" onClick={() => setMenuOpen(false)}>
+              Register
+            </Link>
+          </li>
         </ul>
-
-        {/* Profile Icon */}
-        <div className="profile-icon">
-          <FaUserCircle />
-        </div>
       </div>
     </nav>
   );

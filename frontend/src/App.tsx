@@ -8,13 +8,13 @@ import Register from "./Features/Register";
 import Login from "./Features/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import EducationalContentForm from "./Pages/Education/content";
+import AdminDashboard from "./Pages/AdminDashboard/AdminDashboard";
  
 
 const App: React.FC = () => {
   return (
     <Router>
-      
-        <Navbar />
+    
       
           <Routes>
 
@@ -24,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/content" element={<EducationalContentForm />} />
           </Routes>
     </Router>

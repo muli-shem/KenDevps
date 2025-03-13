@@ -2,20 +2,19 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchPosts, addPost } from '../Dashboard/postSlice';
 import { fetchAllContent } from '../Education/contentSlice';
-import { store } from '../../app/store';
+import {  store } from '../../app/store';
 
 import LeftSidebar from '../../components/LeftSidebar';
 import RightSidebar from '../../components/RightSidebar';
 import MainContent from '../../components/MainContent';
-import Footer from '../Footer'; // Import the Footer component
-import UserNavbar from '../userNavbar'; // Import the UserNavbar component
 
 import '../../styles/Dashboard.scss';
+import UserNavbar from '../userNavbar';
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const dispatch = useDispatch<typeof store.dispatch>();
   const [currentView, setCurrentView] = useState('home');
-
+  
   // State for tracking user interactions
   const [likedItems, setLikedItems] = useState<Record<string, boolean>>({});
   const [dislikedItems, setDislikedItems] = useState<Record<string, boolean>>({});
@@ -28,7 +27,7 @@ const Dashboard = () => {
   // Function to handle navigation
   const handleNavigation = (view: string) => {
     setCurrentView(view);
-
+    
     // Load educational content when switching to that view
     if (view === 'education') {
       dispatch(fetchAllContent());
@@ -83,7 +82,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
+
+     <div className="dashboard-container">
       {/* Add the UserNavbar at the top */}
       <UserNavbar handleNavigation={handleNavigation} />
 
@@ -109,11 +109,8 @@ const Dashboard = () => {
           handleNavigation={handleNavigation}
         />
       </div>
-
-      {/* Add the Footer component here */}
-      <Footer />
     </div>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

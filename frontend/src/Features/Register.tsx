@@ -87,7 +87,6 @@ const Register: React.FC = () => {
 
           {/* Display loading state */}
           {loading && <p>Registering...</p>}
-
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}
           </button>

@@ -22,11 +22,13 @@ import twitterIcon from "../assets/images/Xlogo.png";
 import facebookIcon from "../assets/images/facebook.png";
 import instagramIcon from "../assets/images/instagram.png";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className="home-page">
+      <Navbar/>
       {/* Hero Section */}
       <section
         className="hero"
