@@ -1,9 +1,11 @@
 import React from "react";
 import "../styles/About.scss"; // Ensure the path is correct
+import Navbar from "../components/Navbar";
 
 const About: React.FC = () => {
   return (
     <div className="about-page">
+      <Navbar/>
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">

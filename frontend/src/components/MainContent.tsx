@@ -58,24 +58,26 @@ const MainContent = ({
             ) : (
               <div className="education-cards">
                 {educationContent.map((content) => (
-                  <EducationCard 
-                    key={content.id}
-                    content={{
-                      id: content.id.toString(),
-                      title: content.title,
-                      content: content.content,
-                      content_type: content.content_type,
-                      created_by: content.created_by.toString(),
-                      // Convert null to undefined to match the expected type
-                      image_url: content.image_url || undefined
-                    }}
-                    isLiked={likedItems[content.id] || false}
-                    isDisliked={dislikedItems[content.id] || false}
-                    isBookmarked={bookmarkedItems[content.id] || false}
-                    onLike={() => handleLike(content.id.toString())}
-                    onDislike={() => handleDislike(content.id.toString())}
-                    onBookmark={() => handleBookmark(content.id.toString())}
-                  />
+                  <div className="card" key={content.id}>
+                    <h3>{content.title}</h3>
+                    <p>{content.content}</p>
+                    <EducationCard 
+                      content={{
+                        id: content.id.toString(),
+                        title: content.title,
+                        content: content.content,
+                        content_type: content.content_type,
+                        created_by: content.created_by.toString(),
+                        image_url: content.image_url || undefined
+                      }}
+                      isLiked={likedItems[content.id] || false}
+                      isDisliked={dislikedItems[content.id] || false}
+                      isBookmarked={bookmarkedItems[content.id] || false}
+                      onLike={() => handleLike(content.id.toString())}
+                      onDislike={() => handleDislike(content.id.toString())}
+                      onBookmark={() => handleBookmark(content.id.toString())}
+                    />
+                  </div>
                 ))}
               </div>
             )}
@@ -88,14 +90,17 @@ const MainContent = ({
             <h2>Human Rights Information</h2>
             <div className="rights-cards">
               {humanRightsContent.map((content) => (
-                <HumanRightsCard 
-                  key={content.id}
-                  content={content}
-                  isLiked={likedItems[content.id] || false}
-                  isBookmarked={bookmarkedItems[content.id] || false}
-                  onLike={() => handleLike(content.id.toString())}
-                  onBookmark={() => handleBookmark(content.id.toString())}
-                />
+                <div className="card" key={content.id}>
+                   <h3>{content.title}</h3>
+                  <p>{content.content}</p>
+                  <HumanRightsCard 
+                    content={content}
+                    isLiked={likedItems[content.id] || false}
+                    isBookmarked={bookmarkedItems[content.id] || false}
+                    onLike={() => handleLike(content.id.toString())}
+                    onBookmark={() => handleBookmark(content.id.toString())}
+                  />
+                </div>
               ))}
             </div>
           </section>

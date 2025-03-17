@@ -1,28 +1,24 @@
-// Shared variables
-$accent-secondary: #ff4757;
-$like-color: #4cd137;
-$dislike-color: #e84118;
-$border-radius: 8px;
-$transition: 0.3s ease;
-$secondary-color: #f8f9fa;
-$box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-$text-primary: #333;
-$text-secondary: #666;
+// Import variables
+@import 'variables';
 
 // Card styles
 .card {
-  background: $secondary-color;
+  background: $card-bg;
   border-radius: $border-radius;
   overflow: hidden;
   transition: transform $transition, box-shadow $transition;
   position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-  margin-bottom: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+  margin-bottom: 1.5rem; // Use relative units
   box-shadow: $box-shadow;
+  // Remove horizontal margins completely
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 30px rgba($accent-color, 0.2);
   }
   
   // Gradient border effect on hover
@@ -32,7 +28,7 @@ $text-secondary: #666;
     inset: 0;
     border-radius: $border-radius;
     padding: 2px;
-    background: linear-gradient(135deg, $accent-secondary, #3742fa);
+    background: linear-gradient(135deg, $accent-color, $primary-color);
     mask: 
       linear-gradient(#fff 0 0) content-box, 
       linear-gradient(#fff 0 0);
@@ -51,115 +47,180 @@ $text-secondary: #666;
   
   .card-image {
     width: 100%;
-    height: 180px;
+    margin: 0.625rem 0; // Use relative units
+    border-radius: $border-radius;
     overflow: hidden;
     
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform $transition;
-    }
-    
-    &:hover img {
-      transform: scale(1.05);
+    &.twitter-style {
+      max-height: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      
+      img {
+        width: 100%;
+        object-fit: contain;
+        border-radius: $border-radius;
+        transition: transform 0.5s ease;
+        
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
     }
   }
   
   .card-content {
     padding: 1.5rem;
     
-    h3 {
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-      font-size: 1.25rem;
-      color: $text-primary;
+    .card-header {
+      margin-bottom: 1rem;
+      
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $dark-text;
+      }
+      
+      small {
+        display: block;
+        color: $light-text;
+        font-size: 0.85rem;
+      }
     }
     
-    p {
-      color: $text-secondary;
+    .card-text {
+      color: $dark-text;
       line-height: 1.6;
       margin-bottom: 1rem;
-    }
-    
-    small {
-      display: block;
-      color: $text-secondary;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
+      font-size: 1rem;
+      white-space: pre-wrap;
     }
   }
   
   .card-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     
-    .action-btn {
-      background: none;
-      border: none;
-      padding: 0.5rem 0.75rem;
-      border-radius: $border-radius;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: $text-secondary;
-      transition: background-color $transition, color $transition;
+    .action-wrapper {
+      flex: 1;
       
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-      
-      &.active {
-        font-weight: 600;
-      }
-      
-      &.active svg {
-        animation: pulse 0.5s ease-in-out;
+      .action-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: $light-text;
+        transition: all $transition;
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(0, 0, 0, 0.05);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.5s, height 0.5s;
+          z-index: -1;
+        }
+        
+        &:hover::before {
+          width: 150%;
+          height: 150%;
+        }
+        
+        .action-icon {
+          transition: transform 0.3s ease;
+        }
+        
+        .count {
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        
+        &.animating .action-icon {
+          animation: pulse 0.5s ease-in-out;
+        }
+        
+        &.like-btn {
+          &:hover {
+            color: $like-color;
+          }
+          
+          &.active {
+            color: $like-color;
+            font-weight: 600;
+          }
+        }
+        
+        &.dislike-btn {
+          &:hover {
+            color: $dislike-color;
+          }
+          
+          &.active {
+            color: $dislike-color;
+            font-weight: 600;
+          }
+        }
+        
+        &.share-btn {
+          &:hover {
+            color: $share-color;
+          }
+        }
+        
+        &.bookmark-btn {
+          &:hover {
+            color: $bookmark-color;
+          }
+          
+          &.active {
+            color: $bookmark-color;
+            font-weight: 600;
+          }
+        }
       }
     }
   }
+}
+
+// Container styles to ensure full width
+.content-container {
+  display: flex;
+  width: 100%;
+  padding: 0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 0;
 }
 
 // Specific card types
-.rights-card {
-  border-left: 4px solid $accent-secondary;
-  
-  .action-btn {
-    &.active {
-      color: $accent-secondary;
-    }
-  }
-}
-
 .education-card {
-  border-left: 4px solid #3742fa;
-  
-  .action-btn {
-    &.active {
-      &:nth-child(1) {
-        color: $like-color;
-      }
-      
-      &:nth-child(2) {
-        color: $dislike-color;
-      }
-      
-      &:nth-child(4) {
-        color: #3742fa;
-      }
-    }
-  }
+  border-left: 4px solid $accent-color;
+  background: linear-gradient(to right, rgba($accent-color, 0.03), rgba($accent-color, 0.01), $card-bg);
 }
 
 // Animations
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -172,7 +233,7 @@ $text-secondary: #666;
     transform: scale(1);
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.4);
   }
   100% {
     transform: scale(1);
@@ -180,14 +241,60 @@ $text-secondary: #666;
 }
 
 // Responsive adjustments
+@media (max-width: 1200px) {
+  .card {
+    margin-bottom: 1.25rem; // Adjusted for medium screens
+  }
+}
+
 @media (max-width: 768px) {
   .card {
-    .card-actions {
-      flex-direction: column;
+    margin-bottom: 1rem; // Adjusted for tablets
+    
+    .card-content {
+      padding: 1.25rem;
       
-      .action-btn {
-        width: 100%;
-        justify-content: center;
+      .card-header h3 {
+        font-size: 1.1rem;
+      }
+    }
+    
+    .card-actions {
+      flex-wrap: wrap;
+      
+      .action-wrapper {
+        margin-bottom: 0.5rem;
+        
+        .action-btn {
+          justify-content: center;
+          padding: 0.4rem 0.6rem;
+          
+          .count {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    margin-bottom: 0.75rem; // Adjusted for mobile devices
+    
+    .card-content {
+      padding: 1rem;
+    }
+    
+    .card-actions {
+      .action-wrapper {
+        .action-btn {
+          padding: 0.3rem 0.5rem;
+          
+          span:not(.count) {
+            display: none;
+          }
+        }
       }
     }
   }

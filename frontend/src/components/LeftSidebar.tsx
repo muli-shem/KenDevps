@@ -58,6 +58,7 @@ const LeftSidebar = ({ currentView, handleNavigation, handleAddPost }: LeftSideb
           <li onClick={handleAddPost} className="post-btn">
             <FaPlusCircle /> <span>Post</span>
           </li>
+          
         </ul>
       </div>
     </nav>

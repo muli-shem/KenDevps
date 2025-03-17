@@ -18,11 +18,11 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  
+
   &:hover {
     background-color: darken($bg-color, 10%);
   }
-  
+
   &:disabled {
     background-color: lighten($bg-color, 20%);
     cursor: not-allowed;
@@ -36,30 +36,64 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
+// General layout styles
+.container {
+  display: grid;
+  grid-template-columns: 150px 1fr 150px; // Reduced sidebar sizes to reduce margins
+  gap: 20px;
+  padding: 20px;
+}
+
+.left-sidebar,
+.right-sidebar {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+}
+
+// Form container styles
+.education-form-container,
+.education-list-container {
+  max-width: 100%; // Use full width of the container
+  margin: 0 auto;
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 20px;
+    color: $text-color;
+  }
+}
+
 // Shared form styles
 .form-group {
   margin-bottom: 20px;
-  
+
   label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
   }
-  
+
   .form-control {
     width: 100%;
     padding: 10px;
     border: 1px solid $border-color;
     border-radius: 4px;
     font-size: 16px;
-    
+
     &:focus {
       outline: none;
       border-color: $primary-color;
       box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
     }
   }
-  
+
   .content-textarea {
     min-height: 200px;
     resize: vertical;
@@ -67,60 +101,18 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 // Button styles
-.btn-submit {
-  @include button($primary-color);
-}
+.btn-submit { @include button($primary-color); }
+.btn-cancel { @include button(#95a5a6); margin-right: 10px; }
+.btn-delete { @include button($danger-color); }
+.btn-edit { @include button($secondary-color); margin-right: 10px; }
+.btn-add { @include button($primary-color); text-decoration: none; display: inline-block; }
+.btn-back { @include button(#95a5a6); text-decoration: none; display: inline-block; }
 
-.btn-cancel {
-  @include button(#95a5a6);
-  margin-right: 10px;
-}
-
-.btn-delete {
-  @include button($danger-color);
-}
-
-.btn-edit {
-  @include button($secondary-color);
-  margin-right: 10px;
-}
-
-.btn-add {
-  @include button($primary-color);
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn-back {
-  @include button(#95a5a6);
-  text-decoration: none;
-  display: inline-block;
-}
-
-// Form container styles
-.education-form-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  
-  h1 {
-    margin-bottom: 20px;
-    color: $text-color;
-  }
-  
-  .error-message {
-    background-color: lighten($error-color, 30%);
-    color: $error-color;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-  
-  .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
+// Content grid for cards
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // Adjusted to reduce margins
+  gap: 20px;
 }
 
 // Image upload styles
@@ -133,12 +125,12 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: absolute;
     z-index: -1;
   }
-  
+
   .image-upload-btn {
     @include button($primary-color);
     display: inline-block;
   }
-  
+
   .upload-progress {
     margin-top: 10px;
     width: 100%;
@@ -147,13 +139,13 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
     height: 20px;
-    
+
     .progress-bar {
       height: 100%;
       background-color: $primary-color;
       transition: width 0.3s ease;
     }
-    
+
     span {
       position: absolute;
       left: 50%;
@@ -163,18 +155,18 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       color: $text-color;
     }
   }
-  
+
   .image-preview {
     margin-top: 15px;
     max-width: 300px;
     position: relative;
-    
+
     img {
       width: 100%;
       border-radius: 4px;
       border: 1px solid $border-color;
     }
-    
+
     .btn-remove-image {
       position: absolute;
       top: 10px;
@@ -187,7 +179,7 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
-      
+
       &:hover {
         background-color: $danger-color;
         color: white;
@@ -196,101 +188,59 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 }
 
-// List container styles
-.education-list-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  
-  .list-header {
+// Content cards styling
+.content-card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+
+  .card-header {
+    padding: 15px;
+    border-bottom: 1px solid $border-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    
-    h1 {
+
+    h2 {
       margin: 0;
+      font-size: 18px;
+    }
+
+    .content-type {
+      background-color: $light-bg;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
       color: $text-color;
     }
   }
-  
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+
+  .card-content {
+    padding: 15px;
+    flex-grow: 1;
+
+    p {
+      margin: 0;
+      color: $text-color;
+      line-height: 1.5;
+    }
   }
-  
-  .no-content {
-    text-align: center;
-    padding: 40px;
-    background-color: $light-bg;
-    border-radius: 8px;
-  }
-  
-  .content-card {
-    @include card;
-    display: flex;
-    flex-direction: column;
-    
-    .card-header {
-      padding: 15px;
-      border-bottom: 1px solid $border-color;
+
+  .card-footer {
+    padding: 15px;
+    border-top: 1px solid $border-color;
+
+    .card-meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      
-      h2 {
-        margin: 0;
-        font-size: 18px;
-      }
-      
-      .content-type {
-        background-color: $light-bg;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        color: $text-color;
-      }
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #666;
     }
-    
-    .card-image {
-      height: 180px;
-      overflow: hidden;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-    
-    .card-content {
-      padding: 15px;
-      flex-grow: 1;
-      
-      p {
-        margin: 0;
-        color: $text-color;
-        line-height: 1.5;
-      }
-    }
-    
-    .card-footer {
-      padding: 15px;
-      border-top: 1px solid $border-color;
-      
-      .card-meta {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        font-size: 12px;
-        color: #666;
-      }
-      
-      .card-actions {
-        display: flex;
-        justify-content: flex-end;
-      }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }
@@ -302,20 +252,15 @@ $shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   margin-bottom: 20px;
   border-left: 4px solid $primary-color;
-  
-  h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
+
+  h3 { margin-top: 0; margin-bottom: 10px; }
+
   pre {
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 4px;
     overflow-x: auto;
   }
-  
-  p {
-    margin-bottom: 5px;
-  }
+
+  p { margin-bottom: 5px; }
 }

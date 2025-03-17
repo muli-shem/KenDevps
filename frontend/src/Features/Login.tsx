@@ -5,6 +5,7 @@ import { loginUser } from '../Features/loginSlice';
 import { AppDispatch, RootState } from '../app/store';
 import '../styles/Login.scss';
 import { AlertCircle } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -37,8 +38,12 @@ const Login: React.FC = () => {
     setShowPassword(!showPassword);
   };
   
-  return (
+  return ( 
+  
+    <div className="login">
+    <Navbar/>
     <div className="login-container">
+     
       <div className="login-card">
         <div className="login-header">
           <h1>Welcome Back</h1>
@@ -118,6 +123,8 @@ const Login: React.FC = () => {
         </form>
       </div>
     </div>
+    </div>
+    
   );
 };
 

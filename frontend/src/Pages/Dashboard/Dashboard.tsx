@@ -7,7 +7,6 @@ import { store } from '../../app/store';
 import LeftSidebar from '../../components/LeftSidebar';
 import RightSidebar from '../../components/RightSidebar';
 import MainContent from '../../components/MainContent';
-import Footer from '../Footer'; // Import the Footer component
 import UserNavbar from '../userNavbar'; // Import the UserNavbar component
 
 import '../../styles/Dashboard.scss';
@@ -110,8 +109,6 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Add the Footer component here */}
-      <Footer />
     </div>
   );
 };
