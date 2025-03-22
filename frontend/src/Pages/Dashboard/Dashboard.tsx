@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { fetchPosts, addPost } from '../Dashboard/postSlice';
 import { fetchAllContent } from '../Education/contentSlice';
 import { store } from '../../app/store';
+import { useNavigate } from 'react-router-dom';
 
 import LeftSidebar from '../../components/LeftSidebar';
 import RightSidebar from '../../components/RightSidebar';
@@ -13,6 +14,7 @@ import '../../styles/Dashboard.scss';
 
 const Dashboard = () => {
   const dispatch = useDispatch<typeof store.dispatch>();
+  const navigate = useNavigate();
   const [currentView, setCurrentView] = useState('home');
 
   // State for tracking user interactions
@@ -24,13 +26,22 @@ const Dashboard = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  // Function to handle navigation
-  const handleNavigation = (view: string) => {
+   // Function to handle navigation
+   const handleNavigation = (view: string) => {
     setCurrentView(view);
 
     // Load educational content when switching to that view
     if (view === 'education') {
       dispatch(fetchAllContent());
+    }
+
+    // Handle navigation for specific views
+    switch (view) {
+      case 'content':
+        navigate('/content'); // Navigate to the "Create Civic Content" page
+        break;
+      default:
+        console.warn(`Unknown view: ${view}`);
     }
   };
 

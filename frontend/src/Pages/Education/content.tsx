@@ -5,6 +5,8 @@ import { AppDispatch, RootState } from '../../app/store';
 import { createContent, updateContent, fetchContentById, clearCurrentItem } from './contentSlice';
 import CloudinaryService from '../../cloudinary/cloudinary';
 import '../../styles/content.scss';
+import UserNavbar from '../userNavbar';
+import Footer from '../Footer';
 
 
 // Content types dropdown options
@@ -164,13 +166,31 @@ const EducationalContentForm: React.FC = () => {
         await dispatch(createContent(submissionData as any)).unwrap();
       }
       // Redirect to content list on success
-      navigate('/education');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Submission failed:', error);
     }
   };
   
+  const handleNavigation = (view: string) => {
+    switch (view) {
+      case 'dashboard':
+        navigate('/dashboard');
+        break;
+      case 'education':
+        navigate('/content');
+        break;
+      case 'content':
+        navigate('/content');
+        break;
+      default:
+        console.warn(`Unknown view: ${view}`);
+    }
+  };
   return (
+    <div>
+      <UserNavbar handleNavigation={handleNavigation}/>
+    
     <div className="education-form-container">
       <h1>{id ? 'Edit Educational Content' : 'Create Educational Content'}</h1>
       
@@ -280,6 +300,8 @@ const EducationalContentForm: React.FC = () => {
           </button>
         </div>
       </form>
+    </div>
+    <Footer/>
     </div>
   );
 };

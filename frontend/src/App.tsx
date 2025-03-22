@@ -8,6 +8,8 @@ import Login from "./Features/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import EducationalContentForm from "./Pages/Education/content";
 import AdminDashboard from "./Pages/AdminDashboard/AdminDashboard";
+import ProjectForm from "./Pages/Projects/ProjectForm";
+import ProjectList from "./Pages/Projects/ProjectList";
  
 
 const App: React.FC = () => {
@@ -25,6 +27,8 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/content" element={<EducationalContentForm />} />
+            <Route path="/createproject" element={<ProjectForm/>} />
+            <Route path="/projects" element={<ProjectList/>} />
           </Routes>
     </Router>
   );

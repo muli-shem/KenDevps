@@ -273,3 +273,5 @@ export type TIPosts = typeof posts.$inferInsert;
 export type TSPosts = typeof posts.$inferSelect;
 export type TIEducation = typeof educational_content.$inferInsert;
 export type TSEducation = typeof educational_content.$inferSelect;
+export type TSCommentReports = typeof comments.$inferSelect;
+export type TICommentReports = typeof comments.$inferInsert;

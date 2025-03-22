@@ -31,7 +31,7 @@ const UserNavbar: React.FC<UserNavbarProps> = ({ handleNavigation }) => {
             <button onClick={() => handleNavigation("education")}>Education</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation("community")}>Community</button>
+            <button onClick={() => handleNavigation("content")}>Create Civic Content</button>
           </li>
         </ul>
 

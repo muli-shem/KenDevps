@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../app/store';
 import '../styles/Login.scss';
 import { AlertCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import Footer from '../Pages/Footer';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -123,6 +124,7 @@ const Login: React.FC = () => {
         </form>
       </div>
     </div>
+    <Footer/>
     </div>
     
   );

@@ -19,7 +19,7 @@ export const getProjectsService = async (id:number): Promise<TIProjects | undefi
 
 export const createProjectsService = async(governmentprojects:TIProjects) =>{
     await db.insert(government_projects).values(governmentprojects) 
-    return "Projects Updated"
+    return "Projects Created Successfully"
 }
 
 export const updateProjectsService = async(id:number, governmentprojects: TIProjects)=>{
@@ -29,4 +29,5 @@ export const updateProjectsService = async(id:number, governmentprojects: TIProj
 
 export const deleteProjectsService = async (id:number)=>{
     await db.delete(government_projects).where(eq(government_projects.id, id))
+    return "Projects Deleted"
 }

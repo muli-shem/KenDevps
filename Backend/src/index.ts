@@ -15,6 +15,9 @@ import { leadersRouter } from './leaders/leaders.Router'
 import { leaderscommuneRouter } from './leadercommunication/leadercommunications.Router'
 import {authRouter} from "./auth/auth.Router"
 import {educationRouter} from "./education/education.Router";
+import {projectsRouter} from "./projects/projects.Router";
+import { commentsRouter } from './comments/comments.Router'
+import { feedbackRouter } from './feedbackreports/feedbackreports.Router'
 
 
 
@@ -52,7 +55,9 @@ app.route('/api', leadersRouter)
 app.route('/api', leaderscommuneRouter)
 app.route('/api', authRouter)
 app.route('/api', educationRouter);
-
+app.route('/api', projectsRouter);
+app.route('/api', commentsRouter)
+app.route('/api', feedbackRouter)
 
 
 

@@ -4,6 +4,7 @@ import EducationCard from '../Pages/Education/Education';
 import HumanRightsCard from '../Pages/Education/HumanRights';
 import { humanRightsContent } from './RightSidebar';
 import '../styles/MainContent.scss';
+import ProjectList from '../Pages/Projects/ProjectList';
 
 interface MainContentProps {
   currentView: string;
@@ -107,7 +108,12 @@ const MainContent = ({
         );
       
       case 'explore':
-        return <div className="content-placeholder">Explore content will appear here</div>;
+        return (
+          <section className="explore-content">
+            <h2>Explore Projects</h2>
+            <ProjectList /> {/* Render the ProjectList component */}
+          </section>
+        );
       
       case 'notifications':
         return <div className="content-placeholder">Notifications will appear here</div>;
